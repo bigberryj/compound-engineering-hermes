@@ -1,0 +1,49 @@
+# Compound Engineering — Local Config Template
+# Copy to .compound-engineering/config.local.yaml in your project root.
+# All settings are optional. Invalid values fall through to defaults.
+# This file SHOULD be committed to your repo so teammates can see what
+# settings are available. The actual local file (config.local.yaml) is
+# gitignored — see .gitignore entry: .compound-engineering/*.local.yaml
+
+# --- Strategy (ce-strategy) ---
+# No settings — STRATEGY.md is the entire config
+
+# --- Brainstorm (ce-brainstorm) ---
+# brainstorm_output: md           # md | html (default: md)
+
+# --- Ideate (ce-ideate) ---
+# ideate_output: html             # md | html (default: html)
+
+# --- Compound (ce-compound) ---
+# No settings — full and lightweight are the only modes
+
+# --- Refresh (ce-compound-refresh) ---
+# No settings — scope hint is passed as an argument
+
+# --- Work delegation (Codex CLI, optional) ---
+# work_delegate: codex           # codex | false (default: false)
+# work_delegate_consent: true    # true | false (default: false)
+# work_delegate_sandbox: yolo    # yolo | full-auto (default: yolo)
+# work_delegate_decision: auto   # auto | ask (default: auto)
+# work_delegate_model: gpt-5.4   # any valid codex model
+# work_delegate_effort: high     # minimal | low | medium | high | xhigh
+
+# --- Product pulse (ce-product-pulse) ---
+# pulse_product_name: "MyProduct"                          # required to enable the skill
+# pulse_lookback_default: 24h                              # 1h | 24h | 7d | 30d (default: 24h)
+# pulse_primary_event: "session_started"
+# pulse_value_event: "task_completed"
+# pulse_completion_events: "onboarded,first_purchase"
+# pulse_quality_scoring: false                             # true | false (default: false; AI products only)
+# pulse_quality_dimension: "answer accuracy"               # scored 1-5 when pulse_quality_scoring: true
+# pulse_analytics_source: posthog                          # posthog | mixpanel | custom
+# pulse_tracing_source: sentry                             # sentry | datadog | custom
+# pulse_payments_source: stripe                            # stripe | custom (omit if not used)
+# pulse_db_enabled: false                                  # true | false (default: false; read-only DB if true)
+# pulse_metric_sources: "retention_d7=posthog,nps=delighted"  # strategy-metric -> source overrides; comma-separated 'metric=source' pairs
+# pulse_pending_metrics: "retention_d7,nps"                # comma-separated strategy metrics awaiting instrumentation
+# pulse_excluded_metrics: "north_star"                     # comma-separated strategy metrics intentionally excluded from pulse
+
+# --- Scheduling (Hermes cron) ---
+# pulse_schedule: "0 9 * * *"     # cron expression for recurring pulse runs (set when you accept scheduling in ce-product-pulse)
+# pulse_dismissed_scheduling: false   # set true to silence the "should I schedule this?" prompt
