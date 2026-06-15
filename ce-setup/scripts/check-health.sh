@@ -47,6 +47,8 @@ expected_skills=(
   ce-strategy
   ce-ideate
   ce-brainstorm
+  ce-plan
+  ce-execute
   ce-compound
   ce-compound-refresh
   ce-product-pulse

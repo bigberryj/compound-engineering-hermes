@@ -32,10 +32,12 @@ Every step compounds. A well-captured learning today shortens planning tomorrow.
 | `ce-strategy` | "What is this product and what are we investing in?" | Starting a new product, refreshing direction, or grounding other skills in `STRATEGY.md` |
 | `ce-ideate` | "What are the strongest ideas worth exploring?" | Open-ended: "give me ideas", "what should I improve", "surprise me" |
 | `ce-brainstorm` | "What exactly should one chosen idea mean?" | Vague feature request, scope unclear, need a requirements doc before planning |
+| `ce-plan` | "What's the plan, and what's the risk?" | Non-trivial change coming up; want a paper trail + review gate before execution |
+| `ce-execute` | "Run the plan to done + verified." | After `ce-plan` is approved; runs UNTIL DONE AND VERIFIED. Stops only for true blockers. |
 | `plan` (Hermes built-in) | "How should this be built, step by step?" | A scope exists; need tasks with file paths, paths through code, verification steps |
 | `subagent-driven-development` (Hermes) | "How do I execute a plan efficiently with quality gates?" | Plan is in hand; dispatch fresh subagents per task with two-stage review |
 | `requesting-code-review` (Hermes) | "Is this change ready to merge?" | Before committing/merging; tiered review agents |
-| `ce-compound` | "What did we just learn, and how do we capture it?" | After a hard problem is solved — produces a solution doc into `docs/solutions/` and possibly updates `CONCEPTS.md` |
+| `ce-compound` | "What did we just learn, and how do we capture it?" | After a hard problem is solved — produces a solution doc into `docs/solutions/` and possibly updates `CONCEPTS.md`. For the two-phase workflow, `ce-execute` does this automatically at the end. |
 | `ce-compound-refresh` | "Are my old solution docs still trustworthy?" | Periodic maintenance; consolidates, updates, replaces, or deletes stale docs |
 | `ce-product-pulse` | "How is the product actually performing?" | Time-windowed usage/quality/error report; reads analytics, tracing, payments, DB |
 | `ce-setup` | "Is my environment ready for compound engineering?" | One-shot diagnostic; checks CLI tools, config, gitignore, suggests fixes |
@@ -50,8 +52,10 @@ If the user says any of these, load the matching skill with `skill_view` before 
 | "strategy", "STRATEGY.md", "what are we working on", "write our strategy" | `ce-strategy` |
 | "give me ideas", "what should I improve", "ideate on X", "surprise me" | `ce-ideate` |
 | "let's brainstorm", "what should we build", "help me think through X", vague feature | `ce-brainstorm` |
-| "plan this", "how should we build it", "create a plan", "break this down" | `plan` (Hermes built-in) |
-| "execute the plan", "start work", "run the tasks" | `subagent-driven-development` |
+| "plan this", "plan a fix", "plan a change", "draft a plan for X" | `ce-plan` (CE planning — stops for review) |
+| "how should we build it", "break this down", "task list" | `plan` (Hermes built-in — task breakdown) |
+| "execute the plan", "ship it", "run it", "go", "ce-execute" | `ce-execute` (runs plan to done + verified) |
+| "start work", "run the tasks" | `subagent-driven-development` |
 | "review this", "code review", "is this ready" | `requesting-code-review` |
 | "that worked", "it's fixed", "working now", "problem solved", "document this" | `ce-compound` |
 | "refresh my learnings", "audit docs/solutions", "stale learnings", "consolidate docs" | `ce-compound-refresh` |
@@ -96,7 +100,8 @@ Compound engineering writes to your project repo, not to Hermes home:
 - `docs/solutions/<category>/<slug>.md` — individual learnings
 - `docs/solutions/patterns/<slug>.md` — derived pattern docs
 - `docs/brainstorms/<slug>-requirements.md` — requirements docs from `ce-brainstorm`
-- `docs/plans/<slug>-plan.md` — plans from `plan` (or upstream's `ce-plan`)
+- `docs/plans/<slug>-plan.md` — plans from `ce-plan` (review before execution)
+- `docs/plans/<slug>.md` — plans from the Hermes built-in `plan` (task breakdowns)
 - `docs/ideation/<slug>-ideation.{md,html}` — ideation artifacts from `ce-ideate`
 - `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` — pulse reports from `ce-product-pulse`
 - `.compound-engineering/config.local.yaml` (repo root) — per-project CE config (gitignored)
